@@ -161,7 +161,7 @@
             // echo $row[0];
             if($row[0]>0)
             {
-                echo "email already inserted";
+                echo "<alert>email already Exists </alert>";
             }
             else
             {
