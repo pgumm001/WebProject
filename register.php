@@ -132,7 +132,7 @@
         <label for="exampleInputPassword1">Phone Number</label>
         <input type="text" class="form-control" name="phone">
         
-        <input type="submit" name="register">
+        <button type="submit" name="register">Rregister</button>
         </div>
     </form>
         </body>
@@ -161,14 +161,14 @@
             // echo $row[0];
             if($row[0]>0)
             {
-                echo "<alert>email already Exists </alert>";
+                echo '<script>alert("Email Already exists")</script>';
             }
             else
             {
                 $sql = "INSERT INTO USERS (email, phone, password, is_tfa_enabled, pin,first_name,last_name,approved) VALUES ('$email', '$phone', '$password', 0, '','$fname','$lname',0)";
                 $result = mysqli_query($conn,$sql);
                
-                echo "<a href='login.php'>Please Back to Login</a>";
+                echo "Please Go Back to Login";
                 echo "Thank you for Submitting. You will be able to login once the Admin approves your registration";
             }
         
