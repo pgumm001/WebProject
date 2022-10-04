@@ -108,6 +108,7 @@
             <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Milestone 1</span>
             <div style="float:right;">
                 <a href="update_profile.php" style=" background-color: #4155e7; color: white; border:none" class="btn btn-primary">Update Profile</a> 
+                <a href="index.php" style=" background-color: #4155e7; color: white; border:none" class="btn btn-primary">Home</a> 
                 <button type="button" class="btn btn-primary" style="float:right ; background-color: #4155e7; color: white; border:none" onclick="logout()">Logout</button>
             </div>
         </div>
@@ -186,7 +187,7 @@
     
     </div>
     
-    <input type="submit" name="update">
+    <button type="submit" name="update" style="margin-left:20%">Submit</button>
 </form>   
     <?php
         ini_set('display_errors', '1');
