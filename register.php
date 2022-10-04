@@ -161,7 +161,7 @@
             // echo $row[0];
             if($row[0]>0)
             {
-                echo '<script>alert("Email Already exists")</script>';
+                echo 'Email Already exists';
             }
             else
             {
