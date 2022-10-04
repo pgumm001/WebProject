@@ -68,13 +68,13 @@
         table {
         border-collapse: collapse;
         width: 100%;
-        color: #4c66e0;
+        color: #061162;
         font-family: monospace;
         font-size: 25px;
         text-align: left;
         }
         th {
-        background-color: #4c66e0;
+        background-color: #061162;
         color: white;
         }
         tr:nth-child(even) {background-color: #f2f2f2}
@@ -84,7 +84,7 @@
 
         }
         button{
-            background:#4c66e0;
+            background:#061162;
             border:none;
             padding:1vh;
             margin:1vh;
@@ -105,13 +105,13 @@
       
     </script>
 
-    <nav class="navbar fixed-top navbar-light " style="background-color: #4155e7;">
+    <nav class="navbar fixed-top navbar-light " style="background-color: #061162;">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Milestone 1</span>
             <div style="float:right;">
-                <a href="update_profile.php" style=" background-color: #4155e7; color: white; border:none" class="btn btn-primary">Update Profile</a> 
-                <a href="index.php" style=" background-color: #4155e7; color: white; border:none" class="btn btn-primary">Home</a> 
-                <button type="button" class="btn btn-primary" style="float:right ; background-color: #4155e7; color: white; border:none" onclick="logout()">Logout</button>
+                <a href="update_profile.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Update Profile</a> 
+                <a href="index.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Home</a> 
+                <button type="button" class="btn btn-primary" style="float:right ; background-color: #061162; color: white; border:none" onclick="logout()">Logout</button>
             </div>
         </div>
     </nav>
