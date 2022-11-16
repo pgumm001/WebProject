@@ -161,15 +161,21 @@
             // echo $row[0];
             if($row[0]>0)
             {
-                echo '<script>alert("Email Already exists")</script>';
+                // echo '<script>alert("Email Already exists")</script>';
+                echo '<script language="javascript">';
+                echo 'alert("Email already Exists")';
+                echo '</script>';
             }
             else
             {
                 $sql = "INSERT INTO USERS (email, phone, password, is_tfa_enabled, pin,first_name,last_name,approved) VALUES ('$email', '$phone', '$password', 0, '','$fname','$lname',0)";
                 $result = mysqli_query($conn,$sql);
-               
-                echo "Please Go Back to Login";
+                echo '<script language="javascript">';
+                echo 'Please Go Back to Login';
                 echo "Thank you for Submitting. You will be able to login once the Admin approves your registration";
+                echo '</script>';
+                // echo "Please Go Back to Login";
+                // echo "Thank you for Submitting. You will be able to login once the Admin approves your registration";
             }
         
  
