@@ -1,5 +1,6 @@
 {
     "require": {
-        "twilio/sdk": "^6.42"
+        "twilio/sdk": "^6.42",
+        "elasticsearch/elasticsearch": "~7.0"
     }
 }
