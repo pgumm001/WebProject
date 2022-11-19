@@ -107,7 +107,8 @@
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Web Programming Milestone 1</span>
             <div style="float:right;">
-               
+            <a href="userGroups.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">User Groups </a> 
+            <a href="annotationTasks.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Annotation Tasks </a> 
                 <button type="button" class="btn btn-primary" style="float:right ; background-color: #061162; color: white; border:none" onclick="logout()">Logout</button>
             </div>
         </div>
@@ -119,6 +120,7 @@
             <tr>
                     <th>Email</th>
                     <th>Phone Number</th>
+                    <!-- <th>Assign Group</th> -->
                     <th></th>
                    
             </tr>
@@ -144,29 +146,81 @@
                 }
 
             ?>
+             <?php 
+                        $right_now = getdate();
+                        $this_year = $right_now['year'];
+                        $start_year = 1900;
+            ?>
             <?php
                 if (mysqli_num_rows($result) > 0) {
                
                     while($data = mysqli_fetch_assoc($result)) {
-                       
-                        echo "<tr>";
-                        echo "<td>${data['email']}</td>";
-                        echo "<td>${data['phone']}</td>";
-                        echo "<td align:'center'><button onClick=approveFunction('{$data['id']}')>Approve</button></td>";
-                        echo "</tr>";
-                        
+                    ?>
+                    <!-- <form method="POST" > -->
+                        <tr>
+                            <td><?php echo $data['email']?></td>
+                            <td><?php echo $data['phone']?></td>
+                            <!-- <td>
+                                <select id = "myList" onchange = "favTutorial()" >  
+                                    <option> --Assign Group-- </option>  
+                                    <option> 1 </option>  
+                                    <option> 2 </option>  
+                                    <option> 3 </option>  
+                                    <option> 4 </option> 
+                                    <option> 5 </option>  
+                                    <option> 6 </option>  
+                                    <option> 7 </option>  
+                                    <option> 8 </option>  
+                                    <option> 9 </option>  
+                                    <option> 10 </option>  
+                                    <option> 11 </option>  
+                                    <option> 12</option>  
+                                    <option> 13 </option>  
+                                    <option> 14 </option>  
+                                    <option> 15 </option>  
+                                    <option> 16 </option>  
+                                    <option> 17 </option>  
+                                    <option> 18 </option>  
+                                    <option> 19 </option>  
+                                    <option> 20 </option>   
+                                </select>  
+                            </td> -->
+                            <td ><button onClick= "approveFunction('<?php echo $data['id']?>','<?php echo $data['email']?>')">Approve</button></td>
+                        </tr>
+                    <!-- </form> -->
+                    <?php 
                     }
-                }
-               
+                }      
+           
                 ?>
+                        
+                    
+           
+          
         </table>  
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js?ver=3.3.1"></script>
     
     </div>
         <script>
-            function approveFunction(id) {
+            // function setVal (groupID){
+            //     console.log("group",groupID)
+            // }
+            
+            function favTutorial() {  
+                // var mylist = document.getElementById("myList");  
+                // // console.log(mylist.value)
+                // var gpid = mylist.options[mylist.selectedIndex].text;  
+                // console.log(gpid)
+            }  
+            function approveFunction(id,email) {
+                var grpId = document.getElementById("myList").value;
+                var email=email;
+                console.log("email",email)
+                console.log("group id",grpId)
                 console.log("approve called",id);
                 var app = id;
+               
+                
                 Swal.fire({
                     title: 'Do you want to Approve the user?',
                     showDenyButton: false,
@@ -182,8 +236,9 @@
                                 url : 'approve.php',
                                 type : 'POST',
                                 // dataType: 'json',
-                                data:{id:app},
+                                data:{id:app,grp:grpId,email:email},
                                 success : function (result) {
+                                    // window.location.href="admin.php"
                                     console.log (result); // Here, you need to use response by PHP file.
                                 },
                                 error : function () {
@@ -195,7 +250,7 @@
                
                         Swal.fire('Approved!', '', 'success')
                        
-                        location.reload();
+                        // location.reload();
                     } else if (result.isDenied) {
                         Swal.fire('User not Approved', '', 'info')
                     }

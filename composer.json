@@ -1,5 +1,13 @@
 {
     "require": {
-        "twilio/sdk": "^6.42"
+        "twilio/sdk": "^6.42",
+        "elasticsearch/elasticsearch": "^8.5",
+        "psr/log": "^1"
+    },
+    "config": {
+        "platform-check": false,
+        "platform": {
+            "php": "7.4.21"
+        }
     }
 }

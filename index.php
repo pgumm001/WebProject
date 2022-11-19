@@ -126,6 +126,7 @@
                 error_reporting(E_ALL); 
                 include('config.php');
                 
+                
                 $conn = new mysqli($server, $sqlUsername, $sqlPassword, $databaseName);
                 $user = $_SESSION["user"]->id;
 
@@ -166,21 +167,96 @@
                         echo "</tr>";
                         echo "</table>";
                     }
-                }
-               
-                
-               
+                } 
 
             ?>
    
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js?ver=3.3.1"></script>
     
     </div>
+    <form  method="get" autocomplete="off">
+        <input type="text"  name="search" placeholder="Search.." style ="margin-top:10vh;margin-left:40%">
+        <button type="button" value="search" onClick="searchCaption(document.getElementsByName('search')[0].value)">Search</button>
+
+        <button type="button" value="searchAnnotation" onClick="searchAnnotatedtasks(document.getElementsByName('search')[0].value)" >Search Annotation Tasks</button>
         
-    <input type="text" placeholder="Search.." style ="margin-top:20vh;margin-left:40%">
-    <button type="submit"><i class="fa fa-search"></i></button>
-    <!-- <button type="submit">Search</button> -->
+    </form>
+        
+   <div id="dataTable"></div>
      
 </body>
 
 </html>
+
+
+
+
+<script>
+    $(document).ready(function(){
+        //check if close element exists. If yes, execute the function
+        if($('.close')){
+            $url = window.location.href;
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const product = urlParams.get('q');
+            const pageNo = urlParams.get('page');
+            console.log(product);
+            searchAnnotatedtasks(product,pageNo);
+        } 
+    });
+
+    $(document).ready(function(){
+        //check if close element exists. If yes, execute the function
+        if($('.second')){
+            console.log("inside the search caption doc ready function")
+            $url = window.location.href;
+            console.log("url is ",$url)
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const product = urlParams.get('q');
+            const pageNo = urlParams.get('page');
+            console.log(product);
+            searchCaption(product,pageNo);
+        } 
+    });
+
+    function searchAnnotatedtasks(id,page){
+        console.log("teh search param is ",id)
+        if(page  == null ){
+            page = 1
+        }else{
+            console.log("page number in else is =",page)
+            page = page;
+        }
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET","searchAnnotatedFiles.php?q="+id+"&page="+page,true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function() {
+                console.log("inside xmlhttp")
+                console.log("response",this.responseText);
+                document.getElementById("dataTable").innerHTML=this.responseText;
+        }
+      
+    }
+    function searchCaption(id,page){
+        console.log("the search param inside searchCaption is ",id)
+        if(page  == null ){
+            page = 1
+        }else{
+            page = page;
+        }
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET","searchCaption.php?q="+id+"&page="+page,true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function() {
+                
+                console.log("response",this.responseText);
+                document.getElementById("dataTable").innerHTML=this.responseText;
+        }
+      
+    }
+    
+</script>
+
+           
+         
