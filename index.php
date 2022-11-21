@@ -178,7 +178,7 @@
         <input type="text"  name="search" placeholder="Search.." style ="margin-top:10vh;margin-left:40%">
         <button type="button" value="search" onClick="searchCaption(document.getElementsByName('search')[0].value)">Search</button>
 
-        <button type="button" value="searchAnnotation" onClick="searchAnnotatedtasks(document.getElementsByName('search')[0].value)" >Search Annotation Tasks</button>
+        <button type="button" value="searchAnnotation" onClick="setSearchAnnotatedTasksVar();searchAnnotatedtasks(document.getElementsByName('search')[0].value)" >Search Annotation Tasks</button>
         
     </form>
         
@@ -192,16 +192,23 @@
 
 
 <script>
+    var searchAnnotatedtasksVar = false;
+
     $(document).ready(function(){
         //check if close element exists. If yes, execute the function
         if($('.close')){
+            console.log("searchAnnotatedtasksVar from doc ready is ",searchAnnotatedtasksVar)
             $url = window.location.href;
+            console.log("url is ",$url);
             const queryString = window.location.search;
+            console.log("query string",queryString);
             const urlParams = new URLSearchParams(queryString);
             const product = urlParams.get('q');
             const pageNo = urlParams.get('page');
             console.log(product);
+            searchAnnotatedtasksVar = true;
             searchAnnotatedtasks(product,pageNo);
+            
         } 
     });
 
@@ -220,39 +227,51 @@
         } 
     });
 
-    function searchAnnotatedtasks(id,page){
-        console.log("teh search param is ",id)
+    function setSearchAnnotatedTasksVar (){
+        searchAnnotatedtasksVar ==true;
+    }
+    function searchCaption(id,page){
+        console.log("the search param inside searchCaption is ",id)
+        console.log("the page param inside searchCaption is ",page)
+
         if(page  == null ){
             page = 1
         }else{
-            console.log("page number in else is =",page)
             page = page;
         }
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("GET","searchAnnotatedFiles.php?q="+id+"&page="+page,true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange=function() {
-                console.log("inside xmlhttp")
+        console.log("console log page",page);
+        var xmlhttp1=new XMLHttpRequest();
+        xmlhttp1.open("GET","searchCaption.php?q="+id+"&page="+page,true);
+        xmlhttp1.send();
+        xmlhttp1.onreadystatechange=function() {
+                
                 console.log("response",this.responseText);
                 document.getElementById("dataTable").innerHTML=this.responseText;
         }
       
     }
-    function searchCaption(id,page){
-        console.log("the search param inside searchCaption is ",id)
-        if(page  == null ){
-            page = 1
-        }else{
-            page = page;
+
+
+    function searchAnnotatedtasks(id,page){
+        if(searchAnnotatedtasksVar == true){
+            console.log("teh search param is ",id)
+            if(page  == null ){
+                page = 1
+            }else{
+                console.log("page number in else is =",page)
+                page = page;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("GET","searchAnnotatedFiles.php?q="+id+"&page="+page,true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange=function() {
+                    console.log("inside xmlhttp")
+                    console.log("response",this.responseText);
+                    document.getElementById("dataTable").innerHTML=this.responseText;
+            }
+            searchAnnotatedtasksVar = false;
         }
-        var xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("GET","searchCaption.php?q="+id+"&page="+page,true);
-        xmlhttp.send();
-        xmlhttp.onreadystatechange=function() {
-                
-                console.log("response",this.responseText);
-                document.getElementById("dataTable").innerHTML=this.responseText;
-        }
+        
       
     }
     

@@ -31,7 +31,7 @@ th {text-align: left;}
 
    
         $q = $_GET['q'];
-        $query = $client->search([
+        $query1 = $client->search([
             'body' => [
                 'size' => 2000,
                 'query' =>[
@@ -44,12 +44,12 @@ th {text-align: left;}
             ]
         ]);
 
-        if($query['hits']['total']>=1){
-            $results = $query['hits']['hits'];
-            $total = $query['hits']['total']['value'];
+        if($query1['hits']['total']>=1){
+            $results = $query1['hits']['hits'];
+            $total = $query1['hits']['total']['value'];
         }
 
-
+        // echo "total is ".$total;
         if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
         $url = "https://";   
         else  
@@ -64,15 +64,17 @@ th {text-align: left;}
         $number_of_pages = ceil($total/$results_per_page);
         
         // determine which page number visitor is currently on
-        if (!isset($_GET['page'])) {
-        $page = 1;
-        } else {
-            // echo "inside else of page".$params['page'];
-        $page = $params['page'];
-        // echo "page is =".$page;
-        }
-        $this_page_first_result = ($page-1)*$results_per_page;
+        // if ($params['page']== '') {
+        //     echo "inside if page";
+        // $page = 1;
+        // } else {
+        
+            $page = $params['page'];
+            // echo "page is =".$page;
+        // }
 
+        $this_page_first_result = ($page-1)*$results_per_page;
+        
         $q = $_GET['q'];
         $query = $client->search([
             'body' => [
@@ -90,7 +92,6 @@ th {text-align: left;}
 
         if($query['hits']['total']>=1){
             $results2 = $query['hits']['hits'];
-            // $total = $query['hits']['total']['value'];
         }
         
 
@@ -118,11 +119,19 @@ th {text-align: left;}
             echo "</tr>";
         }
         echo "</table>";
-        
-        for ($page=1;$page<=$number_of_pages;$page++) {
-            echo '<a class="second" href="index.php?q='.$q.'&page=' . $page . '">' . $page . '</a> ';
+        echo "<div>";
+        for ($pag=1;$pag<=$number_of_pages;$pag++) {
+            if($pag == $page){
+                
+            echo '<a style="color:red;" class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+            echo"&nbsp";
+            }
+            else {
+                echo '<a  class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+                echo"&nbsp";
+            }
           }
-
+        echo "</div>";
     ?>
 </body>
 </html>

@@ -109,10 +109,17 @@ while($data = mysqli_fetch_assoc($result)) {
 }
 echo "</table>";
 
-for ($page=1;$page<=$number_of_pages;$page++) {
-  echo '<a class="close" href="index.php?q='.$q.'&page=' . $page . '">' . $page . '</a> ';
+for ($pag=1;$pag<=$number_of_pages;$pag++) {
+  if($pag == $page){
+      
+  echo '<a style="color:red;" class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+  echo"&nbsp";
+  }
+  else {
+      echo '<a  class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+      echo"&nbsp";
+  }
 }
-
 
 
 ?>
