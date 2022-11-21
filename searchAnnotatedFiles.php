@@ -112,11 +112,11 @@ echo "</table>";
 for ($pag=1;$pag<=$number_of_pages;$pag++) {
   if($pag == $page){
       
-  echo '<a style="color:red;" class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+  echo '<a style="color:red;" class="close" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
   echo"&nbsp";
   }
   else {
-      echo '<a  class="second" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
+      echo '<a  class="close" href="index.php?q='.$q.'&page=' . $pag . '">' . $pag . '</a> ';
       echo"&nbsp";
   }
 }

@@ -194,44 +194,82 @@
 <script>
     var searchAnnotatedtasksVar = false;
 
-    $(document).ready(function(){
-        //check if close element exists. If yes, execute the function
-        if($('.close')){
-            console.log("searchAnnotatedtasksVar from doc ready is ",searchAnnotatedtasksVar)
-            $url = window.location.href;
-            console.log("url is ",$url);
-            const queryString = window.location.search;
-            console.log("query string",queryString);
-            const urlParams = new URLSearchParams(queryString);
-            const product = urlParams.get('q');
-            const pageNo = urlParams.get('page');
-            console.log(product);
-            searchAnnotatedtasksVar = true;
-            searchAnnotatedtasks(product,pageNo);
+    // $(document).ready(function(){
+    //     //check if close element exists. If yes, execute the function
+    //     if($('.close')){
+    //         console.log("searchAnnotatedtasksVar from doc ready is ",searchAnnotatedtasksVar)
+    //         $url = window.location.href;
+    //         console.log("url is ",$url);
+    //         const queryString = window.location.search;
+    //         console.log("query string",queryString);
+    //         const urlParams = new URLSearchParams(queryString);
+    //         const product = urlParams.get('q');
+    //         const pageNo = urlParams.get('page');
+    //         console.log(product);
+    //         searchAnnotatedtasksVar = true;
+    //         searchAnnotatedtasks(product,pageNo);
             
-        } 
-    });
-
-    $(document).ready(function(){
-        //check if close element exists. If yes, execute the function
-        if($('.second')){
-            console.log("inside the search caption doc ready function")
-            $url = window.location.href;
+    //     } 
+    // });
+    function initialise() { 
+        $url = window.location.href;
             console.log("url is ",$url)
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const product = urlParams.get('q');
             const pageNo = urlParams.get('page');
-            console.log(product);
+            const functionToCall = urlParams.get('function');
+
+        if( functionToCall == "searchCaption"){ 
+            console.log("inside functionto call ",functionToCall)
             searchCaption(product,pageNo);
-        } 
-    });
+        }
+        else{ 
+           
+            searchAnnotatedtasksVar = true;
+            searchAnnotatedtasks(product,pageNo);
+        }
+    }
+
+    $(document).ready(initialise);
+
+    // $(document).ready(function(){
+    //     //check if close element exists. If yes, execute the function
+    //     if($('.second')){
+    //         console.log("inside the search caption doc ready function")
+    //         $url = window.location.href;
+    //         console.log("url is ",$url)
+    //         const queryString = window.location.search;
+    //         const urlParams = new URLSearchParams(queryString);
+    //         const product = urlParams.get('q');
+    //         const pageNo = urlParams.get('page');
+    //         console.log(product);
+    //         console.log("calling search cap")
+    //         searchCaption(product,pageNo);
+    //     } 
+    //     // if($('.close')){
+    //     else{
+    //         console.log("searchAnnotatedtasksVar from doc ready is ",searchAnnotatedtasksVar)
+    //         $url = window.location.href;
+    //         console.log("url is ",$url);
+    //         const queryString = window.location.search;
+    //         console.log("query string",queryString);
+    //         const urlParams = new URLSearchParams(queryString);
+    //         const product = urlParams.get('q');
+    //         const pageNo = urlParams.get('page');
+    //         console.log(product);
+    //         searchAnnotatedtasksVar = true;
+    //         searchAnnotatedtasks(product,pageNo);
+            
+    //     } 
+        
+    // });
 
     function setSearchAnnotatedTasksVar (){
         // console.log("inside set seach var variable" , id);
         searchAnnotatedtasksVar =true;
         // search= id;
-        // console.log("calling searchannotated tasks");
+        console.log("calling searchannotated tasks");
         // searchAnnotatedtasks(search);   
     }
 
@@ -250,7 +288,7 @@
         xmlhttp1.send();
         xmlhttp1.onreadystatechange=function() {
                 
-                console.log("response",this.responseText);
+                // console.log("response",this.responseText);
                 document.getElementById("dataTable").innerHTML=this.responseText;
         }
       
@@ -258,7 +296,7 @@
 
 
     function searchAnnotatedtasks(id,page){
-        console.log("inside setSearchAnnotatedTasksVar();")
+        console.log("inside setSearchAnnotatedTasks();")
         console.log("searchAnnotatedtasksVar",searchAnnotatedtasksVar);
         if(searchAnnotatedtasksVar == true){
             console.log("teh search param is ",id)
