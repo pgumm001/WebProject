@@ -178,8 +178,8 @@
         <input type="text"  name="search" placeholder="Search.." style ="margin-top:10vh;margin-left:40%">
         <button type="button" value="search" onClick="searchCaption(document.getElementsByName('search')[0].value)">Search</button>
 
-        <button type="button" value="searchAnnotation" onClick="setSearchAnnotatedTasksVar();searchAnnotatedtasks(document.getElementsByName('search')[0].value)" >Search Annotation Tasks</button>
-        
+        <button type="button" value="searchAnnotation" onClick="setSearchAnnotatedTasksVar();searchAnnotatedtasks(document.getElementsByName('search')[0].value);" >Search Annotation Tasks</button>
+        <!-- searchAnnotatedtasks(document.getElementsByName('search')[0].value) -->
     </form>
         
    <div id="dataTable"></div>
@@ -228,8 +228,13 @@
     });
 
     function setSearchAnnotatedTasksVar (){
-        searchAnnotatedtasksVar ==true;
+        // console.log("inside set seach var variable" , id);
+        searchAnnotatedtasksVar =true;
+        // search= id;
+        // console.log("calling searchannotated tasks");
+        // searchAnnotatedtasks(search);   
     }
+
     function searchCaption(id,page){
         console.log("the search param inside searchCaption is ",id)
         console.log("the page param inside searchCaption is ",page)
@@ -253,6 +258,8 @@
 
 
     function searchAnnotatedtasks(id,page){
+        console.log("inside setSearchAnnotatedTasksVar();")
+        console.log("searchAnnotatedtasksVar",searchAnnotatedtasksVar);
         if(searchAnnotatedtasksVar == true){
             console.log("teh search param is ",id)
             if(page  == null ){
