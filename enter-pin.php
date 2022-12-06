@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Home Page</title>
+<title>WebProject</title>
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
