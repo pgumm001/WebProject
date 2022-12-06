@@ -288,7 +288,16 @@ echo "<h2> Records Found is ".$num_rows."</h2>";
         </div> 
         </form>
 	</div>
+       <!-- <footer class="page-footer bottom font-small blue">
+        
+        <div style= "background:#d2d4f0;"class="footer-copyright text-center py-3">© 2022 Copyright:Figure Annotation Task (Milestone 3)
+  
+        </div>
+    </footer> -->
+
+    
 </div>
+
 
 <script>
     function validateSegment(value){
@@ -324,6 +333,12 @@ echo "<h2> Records Found is ".$num_rows."</h2>";
     }
 </script>
 
+   <!-- <footer class="page-footer bottom font-small blue">
+        
+        <div style= "background:#d2d4f0;"class="footer-copyright text-center py-3">© 2022 Copyright:Figure Annotation Task (Milestone 3)
+  
+        </div>
+    </footer> -->
 
 </body>
 

@@ -188,12 +188,62 @@
         
    <div style="min-height:50%;" id="dataTable"></div>
 
+                <!-- Footer -->
+<footer style="background:#7ba0c6;"class="page-footer font-small blue pt-4">
 
-    <footer class="page-footer bottom font-small blue">
+<!-- Footer Links -->
+<div class="container-fluid text-center text-md-left">
+
+  <!-- Grid row -->
+  <div class="row">
+
+    <!-- Grid column -->
+    <div class="col-md-6 mt-md-0 mt-3">
+
+      <!-- Content -->
+      <p class="text-uppercase">Figure Annotation Project</p>
+      <img src="icon.png" style="    height: 32px; width: 31px;"/>
+
+    </div>
+    <!-- Grid column -->
+
+    <hr class="clearfix w-100 d-md-none pb-3">
+
+    <!-- Grid column -->
+    <div class="col-md-3 mb-md-0 mb-3">
+
+      <!-- Links -->
+      <!-- <h5 class="text-uppercase">Links</h5> -->
+
+      <ul class="list-unstyled">
+        <li>
+          <a href="update_profile.php">Update Profile</a>
+        </li>
+       
+      </ul>
+
+    </div>
+
+
+  </div>
+  <!-- Grid row -->
+
+</div>
+<!-- Footer Links -->
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">© 2022 Copyright:WebProject
+</div>
+<!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+    <!-- <footer class="page-footer bottom font-small blue">
+        
         <div style= "background:#d2d4f0;"class="footer-copyright text-center py-3">© 2022 Copyright:Figure Annotation Task (Milestone 3)
   
         </div>
-    </footer>
+    </footer> -->
 
      
 </body>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html>
-<title>WebProject</title>
+<title>Home Page</title>
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
