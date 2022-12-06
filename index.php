@@ -189,7 +189,7 @@
    <div style="min-height:50%;" id="dataTable"></div>
 
                 <!-- Footer -->
-<footer style="background:#7ba0c6;"class="page-footer font-small blue pt-4">
+<footer style="background:#7ba0c6;margin-top:68px"class="page-footer font-small blue pt-4">
 
 <!-- Footer Links -->
 <div class="container-fluid text-center text-md-left">
