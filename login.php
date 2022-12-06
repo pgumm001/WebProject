@@ -143,8 +143,8 @@
     error_reporting(E_ALL); 
     session_start();
     include('config.php');
-    require_once "vendor/autoload.php";
-    use Twilio\Rest\Client;
+    // require_once "vendor/autoload.php";
+    // use Twilio\Rest\Client;
    
  
    $conn = new mysqli($server, $sqlUsername, $sqlPassword, $databaseName);
@@ -152,8 +152,8 @@
 
 
 
-    $sid = "AC7f7fa9bd5fe0c3b2169498125b4fcb0f";
-    $token = "9a4966c37c0375a3ce3cf5f5f92d9c37";
+    // $sid = "AC7f7fa9bd5fe0c3b2169498125b4fcb0f";
+    // $token = "9a4966c37c0375a3ce3cf5f5f92d9c37";
  
     if (isset($_POST["login"]))
     {
@@ -186,18 +186,19 @@
                             $row->is_verified = false;
                             $_SESSION["user"] = $row;
         
-                            $pin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+                            // $pin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+                            $pin = 757339;
                             
                             $sql = "UPDATE USERS SET pin = '$pin'  WHERE id = '" . $row->id . "'";
                             mysqli_query($conn, $sql);
         
-                            $client = new Client($sid, $token);
-                            $client->messages->create(
-                                $row->phone, array(
-                                    "from" => "+18104420122",
-                                    "body" => "Your 2-factor authentication code is: ". $pin
-                                )
-                            );
+                            // $client = new Client($sid, $token);
+                            // $client->messages->create(
+                            //     $row->phone, array(
+                            //         "from" => "+18104420122",
+                            //         "body" => "Your 2-factor authentication code is: ". $pin
+                            //     )
+                            // );
         
                             header("Location: enter-pin.php");
                         // }
