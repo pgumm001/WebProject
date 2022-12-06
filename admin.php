@@ -105,7 +105,7 @@
 
     <nav class="navbar fixed-top navbar-light " style="background-color: #061162;">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Web Programming Milestone 1</span>
+            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Web Programming Figure Annotation Task</span>
             <div style="float:right;">
             <a href="userGroups.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">User Groups </a> 
             <a href="annotationTasks.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Annotation Tasks </a> 

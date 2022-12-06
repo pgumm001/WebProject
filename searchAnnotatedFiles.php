@@ -31,14 +31,20 @@ $id = $_SESSION["user"]->id;
 
 $conn = new mysqli($server, $sqlUsername, $sqlPassword, $databaseName);
 if($q == null){
-  $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id))";
+
+  $sql2="select * from annotated_tasks where annotated = 0 and email like  (select email from USERS where id ='$id') ";
+  // $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id))";
 }
 else{
-  $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id)) And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) ";
+  $sql2 = "select * from  annotated_tasks where annotated =0  and email like  (select email from USERS where id ='$id') And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) ";
+  // $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id)) And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) ";
 }
 
 $result2 = mysqli_query($conn, $sql2);  
-$num_rows = mysqli_num_rows($result2);
+if($result2){
+  $num_rows = mysqli_num_rows($result2);
+}
+
 
 
 
@@ -54,11 +60,14 @@ parse_str($url_components['query'], $params);
 
 $results_per_page = 10;
 $number_of_pages = ceil($num_rows/$results_per_page);
+
 // determine which page number visitor is currently on
-if (!isset($_GET['page'])) {
+if ($_GET['page']=='') {
   $page = 1;
+  
 } else {
   $page = $params['page'];
+ 
 }
 
 
@@ -69,15 +78,19 @@ $this_page_first_result = ($page-1)*$results_per_page;
 
 // retrieve selected results from database and display them on page
 if($q == null){
-  $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id)) LIMIT  $this_page_first_result , $results_per_page";
+ 
+  $sql2="select * from annotated_tasks where  annotated =0 and email like  (select email from USERS where id ='$id') LIMIT  $this_page_first_result , $results_per_page";
+  // $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id))";
 }
 else{
-  $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id)) And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) LIMIT  $this_page_first_result , $results_per_page";
+  $sql2 = "select * from  annotated_tasks where  annotated =0 and email like  (select email from USERS where id ='$id')And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) LIMIT  $this_page_first_result , $results_per_page";
+  // $sql2 = "select * from  figure_segmented_nipseval_test2007 where groupID in (select distinct(groupID) from UserGroups where email in (select email from USERS where id =$id)) And ((lower(object) like '%$q%')  or (lower(caption) like '%$q%') ) ";
 }
+
 
 $result = mysqli_query($conn, $sql2);
 // $num_rows = mysqli_num_rows($result);
-// print_r($num_rows);
+//  print_r($num_rows);
 
 
 if($result2 === false)

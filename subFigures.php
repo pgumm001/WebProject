@@ -67,13 +67,19 @@
         }
         table {
         border-collapse: collapse;
-        width: 60%;
-        margin-left:20%;
+        /* width: 60%;
+        margin-left:20%; */
         color: #061162;
         font-family: monospace;
-        font-size: 25px;
+        font-size: 15px;
         text-align: left;
+        caption-side: bottom;
+            border-collapse: collapse;
+            width: 100%;
+            height: fit-content;
         }
+        
+
         th {
         background-color: #061162;
         color: white;
@@ -92,6 +98,36 @@
             color:white;
             font-weight:bold;
         }
+        .wrapper {
+            display: grid;
+            grid-template-columns: 30% 70%;
+            width: 100vw;
+            height: 100vh;
+        }
+        .box {
+                /* background-color: #444; */
+                color:black ;
+                padding: 1%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        .a {
+            /* background-color: gray; */
+        }
+        .b {
+            /* background-color: blue; */
+        }
+        body {
+            margin: 2em;
+            /* background-color: light-grey; */
+        }
+
+        /* .container {
+            background-color: green;
+            height: 100px;
+        }                                                */
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -105,7 +141,7 @@
 
     <nav class="navbar fixed-top navbar-light " style="background-color: #061162;">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Web Programming Milestone 1</span>
+            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Web Programming Figure Annotation Task</span>
             <div style="float:right;">
             <!-- <a href="userGroups.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">User Groups </a>  -->
             <!-- <a href="assignUser.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Assign User </a>  -->
@@ -149,28 +185,143 @@ $compoundFig = $params['fig'];
 include('config.php');
 $conn = new mysqli($server, $sqlUsername, $sqlPassword, $databaseName);
 
-$sql2 = "select subfigure_file from  figure_segmented_nipseval_test2007 where figure_file = '$compoundFig' ";
+$sql2 = "select * from  figure_segmented_nipseval_test2007 where figure_file = '$compoundFig' ";
 $result2 = mysqli_query($conn, $sql2);  
 $num_rows = mysqli_num_rows($result2);
 
-echo "<h2> Records Found is ".$num_rows."</h2>";
-echo "<table>
-<tr>
-<th>Compound Figure File</th>
-<th>SubFigures</th>
-</tr>"; 
-while($data = mysqli_fetch_assoc($result2)) {
 
-    $path = "segmented_test2007/".$data['subfigure_file'];
-    echo "<tr>";
-    echo "<td>".$compoundFig."</td>";
-    echo "<td><img style='margin-left:20%;margin-top:20px;width:40%;height:30%;' src= ".$path ." ></td>";
-  
-    echo "</tr>";
-    }
-echo "</table>";
+echo "<h2> Records Found is ".$num_rows."</h2>";
 ?>
+<div >
+	<div class="wrapper">
+		<div class="box a">
+            <?php 
+                $subPath = "compound_test2007/".$compoundFig;
+                echo "<table>
+                <tr>
+    
+                <th>Compound Figure</th>
+                </tr>"; 
+                echo "<tr>";
+                echo "<td><img style='margin:10%;width:70%;height:30%;' src= ".$subPath ." ></td>";
+                echo "</tr>";   
+                echo "</table>";
+            
+            ?>
+            <form  action="annotate.php" method="POST" >
+                
+                <p>Are the Original Figures Segmented correctly ?</p>
+                    <input type="radio" id="yes" name="segmented" value="Yes"  required onChange="validateSegment('Yes')">
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="segmented" value="No" onChange="validateSegment('No')">
+                    <label for="no">No</label><br>
+                    <input type="radio" id="unkonwn" name="segmented" value="unkonwn" onChange="validateSegment('unknown)">
+                    <label for="unkonwn">Unknown</label>
+
+                <br>  
+                <br>
+
+                    <label for="segmentedVal">How many sub figures must be segmented from the original figure?</label><br>
+                    <input type="number" id="segmentedVal" name="segmentedVal" ><br><br>
+                
+    
+        </div>
+		<div class="box b">
+        <?php
+            echo "<table>
+            <tr>
+
+            <th>SubFigures</th>
+            </tr>"; 
+            while($data = mysqli_fetch_assoc($result2)) {
+                $rows[] = $data;
+            }
+            for ($i=0;$i<$num_rows;$i++){
+                $path = "segmented_test2007/".$rows[$i]['subfigure_file']; 
+                echo "<tr>";
+                echo "<td>";
+                echo "<img style='margin:5%;width:30%;height:30%;' src= ".$path ." >";
+                echo "<p> Object: ".$rows[$i]['object']."</p>";
+                echo "<p> Aspect: ".$rows[$i]['aspect']."</p>";
+                ?>
+                <input type="text" style="display:none;" name="subFig[<?php echo $i ?>]" value = <?php echo $rows[$i]['subfigure_file'] ?>></input>
+                <label for="objectIdentified[<?php echo $i ?>]">Is the object Identified correctly?</label>
+                <select required className="objectIdentified" id="objectIdentified[<?php echo $i ?>]" name="objectIdentified[<?php echo $i ?>]" onChange = "validateObjIdentified(document.getElementById('objectIdentified[<?php echo $i ?>]').value,<?php echo $i ?>)" >
+                    <option value="" selected disabled hidden>Choose</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+               
+                <br>
+
+                <label for="objectIdentifiedText[<?php echo $i ?>]">What is the correct Object if you answered "no" above?</label><br>
+                <input type="text" id="objectIdentifiedText[<?php echo $i ?>]" name="objectIdentifiedText[<?php echo $i ?>]" ><br><br>
+
+                <label for="aspectIdentified[<?php echo $i ?>]">Is the aspect Identified correctly?</label>
+                <select required id="aspectIdentified[<?php echo $i ?>]" name="aspectIdentified[<?php echo $i ?>]" onChange = "validateAspectIdentified(document.getElementById('aspectIdentified[<?php echo $i ?>]').value,<?php echo $i ?>)">
+                    <option value="" selected disabled hidden>Choose</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Unknown">Unknown</option>
+                </select>
+               
+                <br>
+
+                <label for="aspectIdentifiedText[<?php echo $i ?>]">What is the correct Aspect if you answered "no" above?</label><br>
+                <input type="text" id="aspectIdentifiedText[<?php echo $i ?>]" name="aspectIdentifiedText[<?php echo $i ?>]" ><br><br>
+
+                <?php
+                echo "</td>"; 
+                echo "</tr>";                
+                }
+            echo "</table>";
+            ?>
+
+        </div>
+        <div style="display: flex;justify-content: center;width: 100vw">
+            <button  style="width: max-content;height: max-content;justify-content: center;" type='submit' onClick="validate(<?php echo $num_rows ?>)">Submit</button>
+        </div> 
+        </form>
+	</div>
+</div>
+
+<script>
+    function validateSegment(value){
+        console.log("value",value);
+        segmentedVal
+        if (value=="No"){
+            document.getElementById("segmentedVal").required=true;
+        }
+        else{
+            document.getElementById("segmentedVal").required=false;
+        }
+    }
+    function validateObjIdentified(value,id){
+        // console.log("value",value)
+        // console.log("id",id);
+        if (value=="No"){
+            document.getElementById("objectIdentifiedText["+id+"]").required=true;
+        }
+        else{
+            document.getElementById("objectIdentifiedText["+id+"]").required=false;
+        }
+    }
+    function validateAspectIdentified(value,id){
+        console.log("value",value)
+        console.log("id",id);
+        if (value=="No"){
+            console.log("inside if")
+            document.getElementById("aspectIdentifiedText["+id+"]").required=true;
+        }
+        else{
+            document.getElementById("aspectIdentifiedText["+id+"]").required=false;
+        }
+    }
+</script>
+
 
 </body>
 
 </html>
+

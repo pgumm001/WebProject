@@ -108,7 +108,7 @@
 
     <nav class="navbar fixed-top navbar-light " style="background-color: #061162;">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Milestone 1</span>
+            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Figure Annotation Task</span>
             <div style="float:right;">
                 <a href="login.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Login</a> 
                 <!-- <button type="button" class="btn btn-primary" style="float:right ; background-color: #061162; color: white; border:none" onclick="logout()">Logout</button> --> 

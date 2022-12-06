@@ -167,3 +167,27 @@
             ?>
 
 </table> 
+
+
+$path = "segmented_test2007/".$data['subfigure_file']; 
+                echo "<tr>";
+                echo "<td>";
+                echo "<img style='margin:5%;width:40%;height:30%;' src= ".$path ." >";
+                echo "<p> Object: ".$data['object']."</p>";
+                echo "<p> Aspect: ".$data['aspect']."</p>";
+                ?>
+                  <p>Is the object identified correctly ?</p>
+                  <input type="radio" id="yes" name="objectIdentified" class ="objectIdentified" value="yes" required>
+                  <label for="yes">Yes</label><br>
+                  <input type="radio" id="no" name="objectIdentified" class ="objectIdentified" value="no">
+                  <label for="no">No</label><br>
+                  <input type="radio" id="unkonwn" name="objectIdentified" class ="objectIdentified" value="unkonwn">
+                  <label for="unkonwn">Unknown</label>
+                <br>
+
+                <label for="fname">How many sub figures must be segmented from the original figure?</label><br>
+                <input type="number" id="fname" name="fname" required><br><br>
+
+                <?php
+                echo "</td>"; 
+                echo "</tr>"; 

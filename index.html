@@ -96,6 +96,10 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
@@ -108,7 +112,7 @@
 
     <nav class="navbar fixed-top navbar-light " style="background-color: #061162;">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Milestone 1</span>
+            <span class="navbar-brand mb-0 h2" style="font-weight: bold;color: white;">Figure Annotation Task</span>
             <div style="float:right;">
                 <a href="update_profile.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Update Profile</a> 
                 <a href="index.php" style=" background-color: #061162; color: white; border:none" class="btn btn-primary">Home</a> 
@@ -178,11 +182,19 @@
         <input type="text"  name="search" placeholder="Search.." style ="margin-top:10vh;margin-left:40%">
         <button type="button" value="search" onClick="searchCaption(document.getElementsByName('search')[0].value)">Search</button>
 
-        <button type="button" value="searchAnnotation" onClick="setSearchAnnotatedTasksVar();searchAnnotatedtasks(document.getElementsByName('search')[0].value);" >Search Annotation Tasks</button>
+        <button type="button" id="searchAnnotationTasks" value="searchAnnotation" onClick="setSearchAnnotatedTasksVar();searchAnnotatedtasks(document.getElementsByName('search')[0].value);" >Search Annotation Tasks</button>
         <!-- searchAnnotatedtasks(document.getElementsByName('search')[0].value) -->
     </form>
         
-   <div id="dataTable"></div>
+   <div style="min-height:50%;" id="dataTable"></div>
+
+
+    <footer class="page-footer bottom font-small blue">
+        <div style= "background:#d2d4f0;"class="footer-copyright text-center py-3">© 2022 Copyright:Figure Annotation Task (Milestone 3)
+  
+        </div>
+    </footer>
+
      
 </body>
 
@@ -295,7 +307,7 @@
     }
 
 
-    function searchAnnotatedtasks(id,page){
+     function searchAnnotatedtasks(id,page){
         console.log("inside setSearchAnnotatedTasks();")
         console.log("searchAnnotatedtasksVar",searchAnnotatedtasksVar);
         if(searchAnnotatedtasksVar == true){

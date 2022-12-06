@@ -45,10 +45,14 @@ $sql2 = "insert into UserGroups (email,groupID,DateTime) values ('$email' ,'$gro
 
 $result2 = mysqli_query($conn, $sql2);  
 
+$sql3 = "insert into annotated_tasks (patentID,patentdate,figid,caption,object,aspect,figure_file,subfigure_file,object_title,groupID,Email,annotated)  
+(select s.patentID,s.patentdate,s.figid,s.caption,s.object,s.aspect,s.figure_file,s.subfigure_file,s.object_title,s.groupID,e.email,0 from figure_segmented_nipseval_test2007 s , USERS e where e.email = '$email' and s.groupID='$group')";
 
+$result3 = mysqli_query($conn, $sql3); 
 
+echo $result3;
 
-if($result2 === false)
+if($result3 === false)
 {
   echo "DATABASE ERROR: " . mysqli_error($conn) . "<br />\n";
 }
